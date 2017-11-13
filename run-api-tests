@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+# Run Tests
+cd postfacto-api
+bundle install --path vendor/bundle
+rake db:reset
+rake
+

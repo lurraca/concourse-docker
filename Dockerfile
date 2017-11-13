@@ -6,8 +6,9 @@ SHELL ["/bin/bash", "-c"]
 # Install Rbenv and Ruby
 RUN apt-get update && apt-get install -y autoconf bison build-essential git libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
 
-RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc && echo 'eval "$(rbenv init -)"' >> ~/.bashrc && source ~/.bashrc
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc && echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+ENV PATH /root/.rbenv/bin:$PATH
 RUN rbenv install 2.4.0
 
 # Install PostgreSQL

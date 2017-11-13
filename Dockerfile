@@ -10,6 +10,11 @@ RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && echo 'export PATH="
 RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 ENV PATH /root/.rbenv/bin:$PATH
 RUN rbenv install 2.4.0
+RUN rbenv global 2.4.0
+
+RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
+
+RUN gem install bundler
 
 # Install PostgreSQL
 RUN apt-get update && apt-get install -y postgresql

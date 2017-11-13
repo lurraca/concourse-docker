@@ -1,18 +1,21 @@
-FROM ruby:2.4.2
+FROM ubuntu:16.04
 MAINTAINER pivotal
+
+# Install Rbenv and Ruby
+RUN apt-get update && apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+
+RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc && echo 'eval "$(rbenv init -)"' >> ~/.bashrc && source ~/.bashrc
+RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+RUN rbenv install 2.4.0
 
 # Install PostgreSQL
 RUN apt-get update && apt-get install -y postgresql
-
-# Install Node v 6, bower and gulp
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
-RUN apt-get update && apt-get install -y nodejs
-RUN npm install -g bower
-RUN npm install -g gulp
 
 # Start and initialize PostgreSQL DB
 USER postgres 
 RUN /etc/init.d/postgresql start && createuser --superuser root
 USER root
+
+RUN systemctl enable postgresql
 
 

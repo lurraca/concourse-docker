@@ -8,12 +8,9 @@ RUN apt-get update && apt-get install -y autoconf bison build-essential git libs
 
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc && echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-ENV PATH /root/.rbenv/bin:$PATH
-RUN rbenv install 2.4.0
-RUN rbenv global 2.4.0
-
+ENV PATH $PATH:/root/.rbenv/bin:/root/.rbenv/shims
+RUN rbenv install 2.4.0 && rbenv global 2.4.0 && rbenv rehash
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
-
 RUN gem install bundler
 
 # Install PostgreSQL

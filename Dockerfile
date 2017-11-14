@@ -4,7 +4,7 @@ MAINTAINER pivotal
 SHELL ["/bin/bash", "-c"]
 
 # Install Rbenv and Ruby
-RUN apt-get update && apt-get install -y autoconf bison build-essential git libpq-dev libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev wget
+RUN apt-get update && apt-get install -y autoconf bison build-essential curl git libpq-dev libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev wget
 
 RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv && echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc && echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 RUN git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
@@ -14,7 +14,6 @@ RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
 RUN gem install bundler
 
 ## Install Node
-
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
 RUN apt-get update && apt-get install -y nodejs
 RUN npm install -g bower
@@ -29,5 +28,3 @@ RUN /etc/init.d/postgresql start && createuser --superuser root
 USER root
 
 RUN systemctl enable postgresql
-
-

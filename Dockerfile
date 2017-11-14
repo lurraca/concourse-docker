@@ -13,6 +13,13 @@ RUN rbenv install 2.4.0 && rbenv global 2.4.0 && rbenv rehash
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
 RUN gem install bundler
 
+## Install Node
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash
+RUN apt-get update && apt-get install -y nodejs
+RUN npm install -g bower
+RUN npm install -g gulp
+
 # Install PostgreSQL
 RUN apt-get update && apt-get install -y postgresql
 

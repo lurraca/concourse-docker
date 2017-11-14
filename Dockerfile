@@ -27,4 +27,4 @@ USER postgres
 RUN /etc/init.d/postgresql start && createuser --superuser root
 USER root
 
-RUN systemctl enable postgresql
+CMD /etc/init.d/postgresql start && /bin/bash -c

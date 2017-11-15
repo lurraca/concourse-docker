@@ -27,4 +27,7 @@ USER postgres
 RUN /etc/init.d/postgresql start && createuser --superuser root
 USER root
 
-ENTRYPOINT /etc/init.d/postgresql start && /bin/bash
+ADD run-things /usr/bin/run-things
+RUN chmod a+x /usr/bin/run-things
+
+ENTRYPOINT ["/usr/bin/run-things"]

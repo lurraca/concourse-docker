@@ -30,4 +30,4 @@ USER root
 ADD run-things /usr/bin/run-things
 RUN chmod a+x /usr/bin/run-things
 
-ENTRYPOINT ["/usr/bin/run-things"]
+#ENTRYPOINT ["/usr/bin/run-things && /bin/bash"]

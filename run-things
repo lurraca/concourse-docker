@@ -1,1 +1,5 @@
 service postgresql start
+sleep 1
+$@
+exit_value=$?
+exit $exit_value

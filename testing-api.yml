@@ -11,6 +11,5 @@ inputs:
 - name: postfacto-api
 
 run:
-  path: /usr/bin/run-things
-  args: ['code/run-api-tests']
+  path: code/run-api-tests
 

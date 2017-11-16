@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: lurraca/concourse-docker
+
+inputs:
+- name: code
+- name: postfacto-web
+- name: postfacto-api
+
+run:
+  path: code/run-acceptance-tests
+

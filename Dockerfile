@@ -34,9 +34,19 @@ RUN CHROMEDRIVER_VERSION='2.33' && \
 RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
     echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
 
-RUN apt-get -yqq update && \
-    apt-get -yqq install google-chrome-stable && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get -yqq update && apt-get -yqq install google-chrome-stable && rm -rf /var/lib/apt/lists/*
+
+# Default configuration
+ENV DISPLAY :20.0
+ENV SCREEN_GEOMETRY "1440x900x24"
+ENV CHROMEDRIVER_PORT 4444
+ENV CHROMEDRIVER_WHITELISTED_IPS "127.0.0.1"
+
+ADD xvfb_init /etc/init.d/xvfb
+RUN chmod a+x /etc/init.d/xvfb
+
+
+RUN apt-get update -y && apt-get install -y xvfb
 
 # Install PostgreSQL
 RUN apt-get update && apt-get install -y postgresql

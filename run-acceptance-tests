@@ -3,6 +3,8 @@ set -e
 
 service postgresql start
 
+/etc/init.d/xvfb start
+
 pushd postfacto-web
     npm install
     export PATH=$PATH:./node_modules/.bin
